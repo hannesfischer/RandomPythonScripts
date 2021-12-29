@@ -31,8 +31,6 @@ def calculate_array(start, len, dir, pitch):
 
 
 try:
-    
-    
     while True:
         yval = random.randint(10, 20)
         xval = 0
