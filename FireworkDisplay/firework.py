@@ -18,23 +18,15 @@ matrix = RGBMatrix(options = options)
 
 canvas = matrix.CreateFrameCanvas()
 
-def calculate_arrayx(startx, len, dir, pitch):
-    arrayx = []
+def calculate_array(start, len, dir, pitch):
+    array = []
     for x in range(len):
         if dir == 0:
-            arrayx.append(startx-(x*pitch))
+            array.append(start-(x*pitch))
         if dir == 1:
-            arrayx.append(startx+(x*pitch))
-    return arrayx
+            array.append(start+(x*pitch))
+    return array
 
-def calculate_arrayy(starty, len, dir, pitch):
-    arrayy = []
-    for x in range(len):
-        if dir == 0:
-            arrayy.append(starty-(x*pitch))
-        if dir == 1:
-            arrayy.append(starty+(x*pitch))
-    return arrayy
 
 
 
@@ -63,8 +55,8 @@ try:
             diry = random.randint(0, 1)
             xpitch = random.randint(1, 3)
             ypitch = random.randint(1, 2)
-            burstx = calculate_arrayx(xtop, burst_len, dirx, xpitch)
-            bursty = calculate_arrayy(yval, burst_len, diry, ypitch)
+            burstx = calculate_array(xtop, burst_len, dirx, xpitch)
+            bursty = calculate_array(yval, burst_len, diry, ypitch)
             r = random.randint(0, 255)
             g = random.randint(0, 255)
             b = random.randint(0, 255)
