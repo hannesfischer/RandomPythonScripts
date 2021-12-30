@@ -1,8 +1,10 @@
 from rgbmatrix import RGBMatrix, RGBMatrixOptions, graphics
+import colorsys
 import time as t
 import random
 
 trailing = 3
+num_rockets = 3
 
 options = RGBMatrixOptions()
 options.rows = 32
@@ -27,39 +29,46 @@ def calculate_array(start, len, dir, pitch):
             array.append(start+(x*pitch))
     return array
 
-
+def hsv_to_rgb(hsv):
+    if hsv > 1 or hsv < 0:
+        raise Exception("HSV-Value out of bounds! Allowed: 0 ~ 1")
+    else:
+        rgb = colorsys.hsv_to_rgb(hsv, 1.0, 1.0)
+    return rgb
 
 
 try:
     while True:
-        yval = random.randint(10, 20)
-        xval = 0
-        xtop = random.randint(40, 55)
-        while xval < xtop:
-            matrix.SetPixel(xval, yval, 255, 255, 255)
-            xval += 1
-            t.sleep(0.01)
-            try:
-                matrix.SetPixel(xval-trailing, yval, 0, 0, 0)
-            except:
-               pass
-        for x in range(xtop - trailing, xtop):
-            matrix.SetPixel(x, yval, 0, 0, 0)
-        
-        burst_count = random.randint(6, 10)
-        for x in range(burst_count):
-            burst_len = random.randint(4, 10)
-            dirx = random.randint(0, 1)
-            diry = random.randint(0, 1)
-            xpitch = random.randint(1, 3)
-            ypitch = random.randint(1, 2)
-            burstx = calculate_array(xtop, burst_len, dirx, xpitch)
-            bursty = calculate_array(yval, burst_len, diry, ypitch)
-            r = random.randint(0, 255)
-            g = random.randint(0, 255)
-            b = random.randint(0, 255)
-            for y in range(burst_len):
-                matrix.SetPixel(burstx[y], bursty[y], r, g, b)
+        for ab in range(num_rockets):
+            yval = random.randint(10, 20)
+            xval = 0
+            xtop = random.randint(40, 55)
+            while xval < xtop:
+                matrix.SetPixel(xval, yval, 255, 255, 255)
+                xval += 1
+                t.sleep(0.01)
+                try:
+                    matrix.SetPixel(xval-trailing, yval, 0, 0, 0)
+                except:
+                    pass
+            for x in range(xtop - trailing, xtop):
+                matrix.SetPixel(x, yval, 0, 0, 0)
+            
+            burst_count = random.randint(10, 15)
+            for x in range(burst_count):
+                burst_len = random.randint(4, 10)
+                dirx = random.randint(0, 1)
+                diry = random.randint(0, 1)
+                xpitch = random.randint(1, 3)
+                ypitch = random.randint(1, 2)
+                burstx = calculate_array(xtop, burst_len, dirx, xpitch)
+                bursty = calculate_array(yval, burst_len, diry, ypitch)
+                color = float(random.randint(0.0, 100)) / 100.0
+                r = hsv_to_rgb(color)[0]*255
+                g = hsv_to_rgb(color)[1]*255
+                b = hsv_to_rgb(color)[2]*255
+                for y in range(burst_len):
+                    matrix.SetPixel(burstx[y], bursty[y], r, g, b)
 
         t.sleep(2)
         canvas.Clear()
