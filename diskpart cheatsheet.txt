@@ -1,0 +1,47 @@
+// partition löschen:
+
+list disk
+
+select disk [disknummer]
+
+list partition
+
+select partition [partitions nummer]
+
+delete partition
+
+delete partition override
+
+
+//laufwerkbuchstaben zuweisen
+
+select disk [disknummer]
+
+assign letter=[Buchstabe]
+
+
+//laufwerkbuchstaben entfernen:
+
+remove letter=[Buchstabe]
+
+
+//laufwerksbuchstaben neu vergeben:
+list disk
+
+select disk [nummer]
+
+list partition
+
+select partition [nummer]
+
+remove letter=[Buchstabe]
+
+select disk [andere disknummer]
+
+clean
+
+create partition primary
+
+format quick fs=ntfs label=Benutzerdefiniert
+
+assign letter=[Buchstabe]

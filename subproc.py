@@ -15,7 +15,7 @@ try:
     print("finish")
 
     #diskpart skript ausführen:
-    proc = subprocess.Popen(["diskpart.exe"], shell=True)
+    proc = subprocess.Popen(["diskpart.exe", "/s scriptname.txt"], shell=True)
     proc.communicate()
 
     #user input
