@@ -1,7 +1,13 @@
 import subprocess
 import socket
 
+from os import path
+
 try:
+    #prüfen ob Pfad vorhanden?
+    res = path.isdir("Path/to/check")
+    print(res)
+    
     #IP Addresse auslesen:
     # import sockets
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
