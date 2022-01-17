@@ -4,10 +4,22 @@ import socket
 from os import path
 
 try:
+    #check admin:
+    import ctypes, sys
+    def is_admin():
+        try:
+            return ctypes.windll.shell32.IsUserAnAdmin()
+        except:
+            print("Bitte als Administrator ausführen!")
+            exit()
+
+    #end check admin
+
+
     #prüfen ob Pfad vorhanden?
-    res = path.isdir("Path/to/check")
+    res = path.isdir("Path/to/check") 
     print(res)
-    
+
     #IP Addresse auslesen:
     # import sockets
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -28,6 +40,7 @@ try:
     userinput = input("Prompt Text: ")
 
 
-
-except:
+#exception abfangen:
+except Exception as e:
+    print(e)
     pass
