@@ -1,8 +1,7 @@
-import ctypes, sys
+from re import sub
+import subprocess, sys
+from os import path
+file_path = path.dirname(sys.argv[0])
 
-def is_admin():
-    try:
-        return ctypes.windll.shell32.IsUserAnAdmin()
-    except:
-        return False
-
+s = subprocess.Popen(file_path + "/test.bat", shell=True)
+s.communicate()

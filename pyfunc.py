@@ -1,9 +1,15 @@
+from importlib.metadata import requires
 import subprocess
 import socket
 
 from os import path
 
 try:
+    #get path of python file:
+    import sys
+    file_path = path.dirname(sys.argv[0])
+    print(file_path)
+    
     #check admin:
     import ctypes, sys
     def is_admin():
@@ -42,5 +48,6 @@ try:
 
 #exception abfangen:
 except Exception as e:
+    print("Something went wrong: ")
     print(e)
     pass
