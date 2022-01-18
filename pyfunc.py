@@ -9,7 +9,19 @@ try:
     import sys
     file_path = path.dirname(sys.argv[0])
     print(file_path)
+    #raise SystemError("Errormessage")
+
+    #json lesen
+
+    import json
+    json_file = open(file_path + "/options.json").read()    #lese json Daten
+    json_data = json.loads(json_file)                       #lese json Daten
     
+    json_data["option2"] = "banane"                         #schreibe json Daten
+    json_file = open(file_path + "/options.json", "w")      #schreibe json Daten
+    json_file.write(json.dumps(json_data))                  #schreibe json Daten
+    json_file.close()                                       #schreibe json Daten
+    exit()
     #check admin:
     import ctypes, sys
     def is_admin():
@@ -47,7 +59,5 @@ try:
 
 
 #exception abfangen:
-except Exception as e:
-    print("Something went wrong: ")
+except SystemError as e:
     print(e)
-    pass
