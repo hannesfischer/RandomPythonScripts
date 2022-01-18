@@ -19,7 +19,7 @@ try:
     
     json_data["option2"] = "banane"                         #schreibe json Daten
     json_file = open(file_path + "/options.json", "w")      #schreibe json Daten
-    json_file.write(json.dumps(json_data))                  #schreibe json Daten
+    json_file.write(json.dumps(json_data, indent=4))        #schreibe json Daten
     json_file.close()                                       #schreibe json Daten
     exit()
     #check admin:
