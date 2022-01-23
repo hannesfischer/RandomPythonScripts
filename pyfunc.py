@@ -4,7 +4,15 @@ import socket
 
 from os import path
 
+def run(cmd):
+    completed = subprocess.run(["powershell", "-Command", cmd], capture_output=True)
+    return completed
+
+
 try:
+    #setExecution Policy:
+    run("Set-ExecutionPolicy (Un)restricted") #--> def run():
+
     #get path of python file:
     import sys
     file_path = path.dirname(sys.argv[0])
@@ -20,8 +28,7 @@ try:
     json_data["option2"] = "banane"                         #schreibe json Daten
     json_file = open(file_path + "/options.json", "w")      #schreibe json Daten
     json_file.write(json.dumps(json_data, indent=4))        #schreibe json Daten
-    json_file.close()                                       #schreibe json Daten
-    exit()
+    json_file.close()   
     #check admin:
     import ctypes, sys
     def is_admin():
